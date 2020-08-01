@@ -1,0 +1,21 @@
+{
+    "name": "forever/upload",
+    "description": "Composer Upload File",
+    "type": "library",
+    "require": {
+        "php": "^7.1"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Eson",
+            "email": "409677557@qq.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "ForeverEson\\": "src/"
+        }
+    },
+    "minimum-stability": "dev"
+}
