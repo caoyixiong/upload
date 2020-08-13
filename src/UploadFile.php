@@ -7,6 +7,8 @@
  */
 namespace ForeverEson; // 注意命名空间与 composer.json 中的一致
 
+use think\facade\Config;
+
 class UploadFile {
 	private $config = [
 		'maxSize' => -1, // 上传文件的最大值
@@ -59,15 +61,13 @@ class UploadFile {
 		return isset($this->config[$name]);
 	}
 
-	/**
-	 * 架构函数
-	 * @access public
-	 * @param array $config  上传参数
-	 */
-	public function __construct($config = []) {
-		if (is_array($config)) {
-			$this->config = array_merge($this->config, $config);
-		}
+    /**
+     * 架构函数
+     * UploadFile constructor.
+     * @access public
+     */
+	public function __construct() {
+	    $this->config = array_merge($this->config, Config::get('upload', []));
 	}
 
 	/**
@@ -204,6 +204,7 @@ class UploadFile {
 				}
 				//上传成功后保存文件信息，供其他地方调用
 				unset($file['tmp_name'], $file['error']);
+                $file['author'] = $this->config['author'];
 				$fileInfo[] = $file;
 				$isUpload = true;
 			}
